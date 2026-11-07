@@ -1,0 +1,9 @@
+*
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!run_agent.py
+!src/
+!src/**
+**/__pycache__/
+**/*.pyc

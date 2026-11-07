@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "openjiuwen-challenge"
+version = "0.1.0"
+description = "openJiuwen Challenge 2026"
+requires-python = ">=3.11,<3.14"
+dependencies = ["openjiuwen==0.1.19"]
+
+[project.scripts]
+challenge-agent = "src.cli:main"
+
+[dependency-groups]
+dev = ["pytest==8.4.2", "ruff==0.14.3"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = ["task-dir"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
