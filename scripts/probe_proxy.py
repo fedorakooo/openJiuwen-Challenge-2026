@@ -1,4 +1,4 @@
-"""Proxy contract probe, dev only. Fills the table in SOLUTION_RU.md §19 with facts.
+"""Proxy contract probe, for development only.
 
 Every call spends the team's key quota, so the probe is small (about 25 calls) and stops
 calling a reasoning model as soon as `max_tokens` turns out not to cap its reasoning.

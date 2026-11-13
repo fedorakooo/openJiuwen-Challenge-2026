@@ -12,7 +12,7 @@ _MAX_CHARS_PER_TOKEN = 6.0
 _SMOOTHING = 0.2
 
 # (task type, tier) -> (expected cost in output equivalents, prior success probability).
-# Priors from SOLUTION_RU.md §10.2; expected costs are corrected online by `observe`.
+# Expected costs are corrected online by `observe`.
 _PRIORS: dict[tuple[str, str], tuple[float, float]] = {
     ("math", "T1"): (70.0, 0.85),
     ("data_analysis", "T1"): (80.0, 0.85),

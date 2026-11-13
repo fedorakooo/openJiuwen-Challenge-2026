@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Smoke test: build the image and run the organisers' exact command (SOLUTION_RU.md §5.1)
+# Smoke test: build the image and run the organisers' command
 # on a temporary copy of the samples with --network none and without LLM_* variables.
-# The samples in task-dir/ are never modified.
+# The source samples are never modified.
 #
 # Usage: scripts/smoke.sh [--no-build] [--pytest] [--live]
 #   --no-build  reuse an existing hack:latest image
@@ -92,7 +92,7 @@ trap 'rm -rf "$TASKS" "$TASKS.log"' EXIT
 grep -q "loaded 8 tasks" "$TASKS.log" || echo "note: the run did not report 8 loaded tasks"
 
 step "4. checks outside the container"
-[ "$(snapshot "$SAMPLES")" = "$SAMPLES_BEFORE" ] || fail "task-dir/ was modified"
+[ "$(snapshot "$SAMPLES")" = "$SAMPLES_BEFORE" ] || fail "samples directory was modified"
 answers=$(find "$TASKS" -name answer.txt | wc -l)
 echo "answer.txt files in the copy: $answers"
 if [ "$answers" = 0 ]; then
@@ -121,7 +121,7 @@ if [ "$LIVE" = 1 ]; then
   [ "$code" = 0 ] || fail "live container exited with code $code"
   grep -E "phase 1 (done|cost)|model tier" "$LIVE_TASKS.log" || echo "note: phase 1 did not run"
   "$PYTHON" "$(host_path "$REPO/scripts/check.py")" "$(host_path "$LIVE_TASKS")"     --reference "$(host_path "$SAMPLES")" || echo "LIVE: not every sample was solved by the model"
-  [ "$(snapshot "$SAMPLES")" = "$SAMPLES_BEFORE" ] || fail "task-dir/ was modified"
+  [ "$(snapshot "$SAMPLES")" = "$SAMPLES_BEFORE" ] || fail "samples directory was modified"
 fi
 
 if [ "$PYTEST" = 1 ]; then

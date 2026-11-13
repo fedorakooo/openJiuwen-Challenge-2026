@@ -643,7 +643,7 @@ def solve(task: Task) -> Outcome:
         if untouched:
             return Outcome(Verdict.UNGROUNDED, reason="a failing test never calls the library")
         fixed, edits, refusal = _repair(lab, original, facts)
-        # A partial repair is free and cannot score worse than no answer (SOLUTION_RU.md 9.2).
+        # A partial repair is free and cannot score worse than no answer.
         keep_partial = fixed != original and load_settings().answer_when_unsure
         if refusal is not None and not keep_partial:
             return Outcome(Verdict.UNPARSED, reason=refusal, evidence="; ".join(edits) or None)
