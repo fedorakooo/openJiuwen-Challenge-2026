@@ -10,6 +10,7 @@ FROM python:3.13.5-slim-bookworm
 WORKDIR /app
 ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 HOME=/tmp \
+    TMPDIR=/tmp XDG_CACHE_HOME=/tmp/.cache MPLCONFIGDIR=/tmp/.mpl \
     HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 COPY --from=builder /app/.venv /app/.venv
 COPY run_agent.py ./
